@@ -1,0 +1,12 @@
+.env
+venv
+.env.*
+
+./package-lock.json
+
+frontend/build
+frontend/node_modules
+
+cache/*
+
+**/__pycache__/

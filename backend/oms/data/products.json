@@ -1,0 +1,72 @@
+[
+  {
+    "price": 12.99,
+    "translations": [
+      {"lang": "en", "name": "The Great Gatsby"},
+      {"lang": "it", "name": "Il grande Gatsby"}
+    ]
+  },
+  {
+    "price": 10.50,
+    "translations": [
+      {"lang": "en", "name": "To Kill a Mockingbird"},
+      {"lang": "it", "name": "Il buio oltre la siepe"}
+    ]
+  },
+  {
+    "price": 9.99,
+    "translations": [
+      {"lang": "en", "name": "1984"},
+      {"lang": "it", "name": "1984"}
+    ]
+  },
+  {
+    "price": 8.75,
+    "translations": [
+      {"lang": "en", "name": "Pride and Prejudice"},
+      {"lang": "it", "name": "Orgoglio e pregiudizio"}
+    ]
+  },
+  {
+    "price": 11.20,
+    "translations": [
+      {"lang": "en", "name": "Moby Dick"},
+      {"lang": "it", "name": "Moby Dick"}
+    ]
+  },
+  {
+    "price": 13.50,
+    "translations": [
+      {"lang": "en", "name": "War and Peace"},
+      {"lang": "it", "name": "Guerra e pace"}
+    ]
+  },
+  {
+    "price": 7.80,
+    "translations": [
+      {"lang": "en", "name": "The Catcher in the Rye"},
+      {"lang": "it", "name": "Il giovane Holden"}
+    ]
+  },
+  {
+    "price": 14.25,
+    "translations": [
+      {"lang": "en", "name": "Brave New World"},
+      {"lang": "it", "name": "Il mondo nuovo"}
+    ]
+  },
+  {
+    "price": 6.99,
+    "translations": [
+      {"lang": "en", "name": "Animal Farm"},
+      {"lang": "it", "name": "La fattoria degli animali"}
+    ]
+  },
+  {
+    "price": 15.00,
+    "translations": [
+      {"lang": "en", "name": "Don Quixote"},
+      {"lang": "it", "name": "Don Chisciotte"}
+    ]
+  }
+]

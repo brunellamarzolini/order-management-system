@@ -1,0 +1,21 @@
+ {
+    "name": "order-manager",
+    "version": "0.0.1",
+    "description": "Order Manager Application",
+    "directories": {},
+    "scripts": {
+        "//": "**************** MISC UTILITY ****************",
+        "init": "node init/init.js",
+        "dev": "docker compose up",
+        "down": "docker compose down",
+        "django": "docker compose exec backend python manage.py",
+        "makemigrations": "docker compose exec backend python manage.py makemigrations",
+        "migrate": "docker compose exec backend python manage.py migrate",
+        "createsuperuser": "docker compose exec backend python manage.py createsuperuser",
+        "populate_langs": "docker compose exec backend python manage.py populate_languages",
+        "populate_osm": "docker compose exec backend python manage.py populate_products && docker compose exec backend python manage.py populate_orders"
+
+    },
+    "author": "",
+    "license": "ISC"
+}
