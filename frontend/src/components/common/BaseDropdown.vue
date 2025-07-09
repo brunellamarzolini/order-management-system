@@ -15,7 +15,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: 'Select an option',
+    default: '',
   },
   id: {
     type: String,
@@ -73,7 +73,12 @@ onBeforeUnmount(() => {
         {{ selectedOption || placeholder }}
       </div>
       <ul v-if="isOpen" class="dropdown-options">
-        <li class="dropdown-placeholder" style="color: #888; cursor: default" @click.stop>
+        <li
+          v-if="placeholder"
+          class="dropdown-placeholder"
+          style="color: #888; cursor: default"
+          @click.stop
+        >
           {{ placeholder }}
         </li>
         <li

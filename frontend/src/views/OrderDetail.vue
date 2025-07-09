@@ -193,7 +193,6 @@ function addSelectedProductsToOrder() {
   showAddProductModal.value = false
 }
 
-
 const newTotalAmount = ref('0.00')
 watch(
   () => editableOrder.value?.product_details,
@@ -205,13 +204,13 @@ watch(
     const sum = productDetails.reduce((acc, p) => acc + (Number(p.price) || 0), 0)
     newTotalAmount.value = sum.toFixed(2)
   },
-  { deep: true, immediate: true }
+  { deep: true, immediate: true },
 )
 
 const isProductsChanged = computed(() => {
   if (!editableOrder.value || !order.value) return false
-  const a = (editableOrder.value.product_details || []).map(p => p.id).sort()
-  const b = (order.value.product_details || []).map(p => p.id).sort()
+  const a = (editableOrder.value.product_details || []).map((p) => p.id).sort()
+  const b = (order.value.product_details || []).map((p) => p.id).sort()
   if (a.length !== b.length) return true
   for (let i = 0; i < a.length; i++) {
     if (a[i] !== b[i]) return true
@@ -327,19 +326,21 @@ const isProductsChanged = computed(() => {
       <div>
         <p>
           <strong>Created at:</strong>
-          <span class="ml-2">{{ order?.created_at ? new Date(order.created_at).toLocaleString() : 'N/A' }}</span>
+          <span class="ml-2">{{
+            order?.created_at ? new Date(order.created_at).toLocaleString() : 'N/A'
+          }}</span>
         </p>
         <p>
           <strong>Updated at:</strong>
-          <span class="ml-2">{{ order?.updated_at ? new Date(order.updated_at).toLocaleString() : 'N/A' }}</span>
+          <span class="ml-2">{{
+            order?.updated_at ? new Date(order.updated_at).toLocaleString() : 'N/A'
+          }}</span>
         </p>
         <p>
           <strong>Total Amount:</strong>
           <span v-if="isProductsChanged && order?.total_amount" class="ml-2">
             <s>{{ order.total_amount }} €</s>
-            <span class="text-success font-weight-bold ml-2">
-              {{ newTotalAmount }} €
-            </span>
+            <span class="text-success font-weight-bold ml-2"> {{ newTotalAmount }} € </span>
           </span>
           <span v-else class="ml-2">
             {{ order?.total_amount ? `${order.total_amount} €` : '0.00 €' }}

@@ -61,9 +61,9 @@ This project uses Docker for both the backend (Django) and frontend (Vue). All c
 
 To access and use the project, you must run, from the project root, the following commands in order:
 
-1. **Start the project (detached mode):**
+1. **Start the project:**
    ```bash
-   npm run dev:detach
+   npm run dev
    ```
    > Starts all services in the background using Docker Compose.
 

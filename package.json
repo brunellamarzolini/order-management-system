@@ -7,6 +7,7 @@
         "//": "**************** MISC UTILITY ****************",
         "init": "node init/init.js",
         "dev": "docker compose up",
+        "dev:detach": "docker compose up -d",
         "down": "docker compose down",
         "django": "docker compose exec backend python manage.py",
         "makemigrations": "docker compose exec backend python manage.py makemigrations",
