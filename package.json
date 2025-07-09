@@ -13,8 +13,10 @@
         "migrate": "docker compose exec backend python manage.py migrate",
         "createsuperuser": "docker compose exec backend python manage.py createsuperuser",
         "populate_langs": "docker compose exec backend python manage.py populate_languages",
-        "populate_osm": "docker compose exec backend python manage.py populate_products && docker compose exec backend python manage.py populate_orders"
-
+        "populate_osm": "docker compose exec backend python manage.py populate_languages && docker compose exec backend python manage.py populate_products && docker compose exec backend python manage.py populate_orders",
+        "format": "docker compose exec frontend npm run format",
+        "lint": "docker compose exec frontend npm run lint",
+        "test": "docker compose exec backend python manage.py test oms"
     },
     "author": "",
     "license": "ISC"

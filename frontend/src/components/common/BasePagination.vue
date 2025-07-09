@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
   totalPages: {
     type: Number,
@@ -16,7 +16,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:currentPage'])
 
-function go(page) {
+function go(page: number) {
   if (page >= 1 && page <= props.totalPages) {
     emit('update:currentPage', page)
   }

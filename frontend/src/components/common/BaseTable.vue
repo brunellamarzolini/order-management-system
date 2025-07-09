@@ -1,27 +1,26 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
-const props = defineProps({
-  headers: {
-    type: Array,
-    required: true,
-  },
-  rows: {
-    type: Array,
-    required: true,
-  },
-  loading: {
-    type: Boolean,
-    default: false,
-  },
-})
+interface Header {
+  key: string
+  label: string
+  sortable?: boolean
+}
 
-const sortKey = ref(null)
+defineProps<{
+  headers: Header[]
+  rows: Record<string, unknown>[]
+  loading?: boolean
+  showClearFilters?: boolean
+}>()
+
+import type { Ref } from 'vue'
+const sortKey: Ref<string | null> = ref(null)
 const sortOrder = ref('asc')
 
-const emit = defineEmits(['update:sort'])
+const emit = defineEmits(['update:sort', 'clear-filters'])
 
-function sort(key) {
+function sort(key: string) {
   if (sortKey.value === key) {
     sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc'
   } else {
@@ -32,7 +31,11 @@ function sort(key) {
   emit('update:sort', { key: sortKey.value, dir: sortOrder.value })
 }
 
-function getSortClass(key) {
+function clearFilters() {
+  emit('clear-filters')
+}
+
+function getSortClass(key: string | null) {
   if (sortKey.value === key) {
     return sortOrder.value === 'asc' ? 'icon-sort-asc' : 'icon-sort-desc'
   }
@@ -41,9 +44,12 @@ function getSortClass(key) {
 </script>
 
 <template>
-  <div class="table">
+  <div class="base-table">
     <div class="table-filters">
       <slot name="filters" />
+      <a v-if="showClearFilters" href="#" class="clear-filters-link" @click.prevent="clearFilters"
+        >Clear filters</a
+      >
     </div>
 
     <div class="table-wrapper">
@@ -59,13 +65,18 @@ function getSortClass(key) {
               :key="header.key"
               @click="header.sortable && sort(header.key)"
             >
-              {{ header.label }}
-              <span v-if="header.sortable" :class="getSortClass(header.key)"></span>
+              <template v-if="$slots[header.key + '-header']">
+                <slot :name="header.key + '-header'" />
+              </template>
+              <template v-else>
+                {{ header.label }}
+                <span v-if="header.sortable" :class="getSortClass(header.key)"></span>
+              </template>
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="row in rows" :key="row.id">
+          <tr v-for="row in rows" :key="String(row.id)">
             <td v-for="header in headers" :key="header.key">
               <slot :name="header.key" :row="row">{{ row[header.key] }}</slot>
             </td>
@@ -81,15 +92,18 @@ function getSortClass(key) {
 </template>
 
 <style lang="scss" scoped>
-.table {
+.base-table {
+  width: 100%;
+
   .table-filters {
-    display: flex;
-    align-items: center;
-    gap: $space-3;
     margin-bottom: $space-3;
 
-    @media (max-width: $breakpoint-lg) {
-      display: grid;
+    .clear-filters-link {
+      display: inline-block;
+      width: 100%;
+      text-align: right;
+      margin-top: $space-2;
+      color: $color-primary;
     }
   }
 

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useToast } from '@/composables/useToast'
 
 const { visible, message, type } = useToast()
@@ -22,9 +22,9 @@ const { visible, message, type } = useToast()
   z-index: 1000;
 }
 .toast.error {
-  background-color: $color-bg-error;
+  background-color: $color-error;
 }
 .toast.success {
-  background-color: $color-bg-success;
+  background-color: $color-success;
 }
 </style>

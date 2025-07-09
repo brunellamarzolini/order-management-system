@@ -8,3 +8,10 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+# class PublishedStateModel(models.Model):
+#     published = models.BooleanField("Published", default=False)
+# 
+#     class Meta:
+#         abstract = True

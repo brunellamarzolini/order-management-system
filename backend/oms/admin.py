@@ -5,7 +5,7 @@ from django.forms import Textarea
 from .models import Order, Product, ProductLang
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "date",)
+    list_display = ("id", "name", "created_at",)
     search_fields = ("name", "description",)
     formfield_overrides = {
         models.CharField: {'widget': Textarea(attrs={'rows': 2, 'cols': 40})},

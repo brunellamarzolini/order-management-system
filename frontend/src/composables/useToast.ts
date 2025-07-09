@@ -5,7 +5,9 @@ const message = ref('')
 const type = ref('error') // available status: ['error', 'success']
 
 export function useToast() {
-  function showToast(msg, toastType = 'error', duration = 3000) {
+  type ToastType = 'error' | 'success'
+
+  function showToast(msg: string, toastType: ToastType = 'error', duration: number = 3000): void {
     message.value = msg
     type.value = toastType
     visible.value = true

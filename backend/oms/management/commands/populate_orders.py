@@ -15,10 +15,12 @@ class Command(BaseCommand):
                 name=entry['name'],
                 defaults={
                     'description': entry.get('description', ''),
-                    'date': entry['date']
                 }
             )
             if created:
+                # Set created_at after creation (bypassing auto_now_add)
+                Order.objects.filter(pk=order.pk).update(created_at=entry['created_at'])
+                order.refresh_from_db()
                 self.stdout.write(self.style.SUCCESS(f"Added order: {order.name}"))
             else:
                 self.stdout.write(f"Order already exists: {order.name}")

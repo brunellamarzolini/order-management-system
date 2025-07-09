@@ -1,5 +1,8 @@
 //@import 'variables';
 @use 'variables' as *;
+@use 'sass:map';
+
+@use './multiselect.scss' as *;
 
 * {
   box-sizing: border-box;
@@ -44,6 +47,91 @@ body {
   }
 }
 
+/** spacing **/
+
+$space-map: (
+  0: $space-0,
+  1: $space-1,
+  2: $space-2,
+  3: $space-3,
+  4: $space-4,
+  5: $space-5,
+  6: $space-6,
+  7: $space-7,
+);
+
+@for $i from 0 through 7 {
+  .m-#{$i} {
+    margin: map.get($space-map, $i);
+  }
+  .mt-#{$i} {
+    margin-top: map.get($space-map, $i);
+  }
+  .mb-#{$i} {
+    margin-bottom: map.get($space-map, $i);
+  }
+  .ml-#{$i} {
+    margin-left: map.get($space-map, $i);
+  }
+  .mr-#{$i} {
+    margin-right: map.get($space-map, $i);
+  }
+  .mx-#{$i} {
+    margin-left: map.get($space-map, $i);
+    margin-right: map.get($space-map, $i);
+  }
+  .my-#{$i} {
+    margin-top: map.get($space-map, $i);
+    margin-bottom: map.get($space-map, $i);
+  }
+  .p-#{$i} {
+    padding: map.get($space-map, $i);
+  }
+  .pt-#{$i} {
+    padding-top: map.get($space-map, $i);
+  }
+  .pb-#{$i} {
+    padding-bottom: map.get($space-map, $i);
+  }
+  .pl-#{$i} {
+    padding-left: map.get($space-map, $i);
+  }
+  .pr-#{$i} {
+    padding-right: map.get($space-map, $i);
+  }
+  .px-#{$i} {
+    padding-left: map.get($space-map, $i);
+    padding-right: map.get($space-map, $i);
+  }
+  .py-#{$i} {
+    padding-top: map.get($space-map, $i);
+    padding-bottom: map.get($space-map, $i);
+  }
+}
+
+/** typography **/
+
+.text-normal {
+  font-size: $font-size-normal;
+}
+.text-sm {
+  font-size: $font-size-sm;
+}
+.text-md {
+  font-size: $font-size-md;
+}
+
+.text-success {
+  color: $color-success;
+}
+
+.font-weight-normal {
+  font-weight: $font-weight-normal;
+}
+.font-weight-bold {
+  font-weight: $font-weight-bold;
+}
+
 a {
   color: $color-primary;
   transition: all 0.3s ease;
@@ -53,9 +141,72 @@ a {
   }
 }
 
+/** forms **/
+
 input,
-input::placeholder {
+input::placeholder,
+textarea,
+textarea::placeholder {
   font-family: $font-base;
+}
+
+input[type='checbox'] {
+  margin: auto;
+}
+
+.field-msg-error {
+  color: $color-error;
+  font-size: $font-size-sm;
+  margin-top: $space-1;
+}
+
+.base-label {
+  display: block;
+  margin-bottom: $space-1;
+  font-size: $font-size-sm;
+  color: $color-text;
+}
+
+.base-form-field {
+  width: 100%;
+  min-height: 42px;
+  padding: $space-1 $space-2;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-normal;
+  &:focus {
+    outline: none;
+  }
+}
+
+/** buttons **/
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: $space-2 $space-4;
+  border: none;
+  border-radius: $border-radius-md;
+  color: #fff;
+  font-family: $font-base;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  cursor: pointer;
+  transition: 'background' 0.2s;
+  &:disabled {
+    background: $color-primary-light;
+    cursor: not-allowed;
+  }
+}
+.btn-primary {
+  background: $color-primary;
+}
+.btn-danger {
+  background: $color-error;
+}
+.btn-secondary {
+  background: $color-primary-light;
 }
 
 /** scrollbar **/

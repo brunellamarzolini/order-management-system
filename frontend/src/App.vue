@@ -1,39 +1,19 @@
-<script setup>
-import Toast from '@/components/common/Toast.vue'
-import Card from './components/common/Card.vue'
-import OrderList from './views/OrderList.vue'
+<script setup lang="ts">
+import BaseToast from '@/components/common/BaseToast.vue'
+import { useAuth } from '@/composables/useAuth'
+import BaseButton from './components/common/BaseButton.vue'
+
+const { isAuthenticated, logout } = useAuth()
 </script>
 
 <template>
   <div class="app">
-    <Toast />
-
-    <div class="container">
-      <Card title="Order Management System">
-        <OrderList />
-      </Card>
-    </div>
+    <BaseToast />
+    <header v-if="isAuthenticated">
+      <nav style="display: flex; justify-content: flex-end; padding: 1rem">
+        <BaseButton @click="logout" class="btn-primary">Logout</BaseButton>
+      </nav>
+    </header>
+    <router-view />
   </div>
 </template>
-
-<style scoped lang="scss">
-.filters {
-  display: grid;
-  grid-template-columns: 120px auto;
-  gap: $space-2 $space-3;
-  margin-bottom: $space-3;
-
-  .row {
-    display: contents;
-  }
-
-  .label {
-    font-weight: bold;
-    text-align: left;
-  }
-
-  .value {
-    text-align: left;
-  }
-}
-</style>

@@ -1,5 +1,5 @@
-<script setup>
-const props = defineProps({
+<script setup lang="ts">
+defineProps({
   title: {
     type: String,
     default: '',
@@ -9,7 +9,7 @@ const props = defineProps({
 
 <template>
   <div class="card">
-    <h3 class="card-title" v-if="title">{{ title }}</h3>
+    <div class="card-title" v-if="title">{{ title }}</div>
     <div class="card-content">
       <slot />
     </div>
@@ -18,15 +18,15 @@ const props = defineProps({
 
 <style scoped lang="scss">
 .card {
+  width: 100%;
   background-color: white;
   border-radius: $border-radius-sm;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: $shadow-sm;
   padding: $space-3;
-  margin-bottom: $space-4;
 
   .card-title {
-    margin: 0 0 $space-3 0;
-    font-size: 1.25rem;
+    //margin: 0 0 $space-3 0;
+    font-size: $font-size-md;
     font-weight: bold;
     color: $color-primary;
   }

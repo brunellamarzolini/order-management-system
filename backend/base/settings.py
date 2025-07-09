@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,7 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #'debug_toolbar',
     'rest_framework',
+    'django_filters',
+    'drf_spectacular',
     'corsheaders',
 
     'base',
@@ -44,10 +49,10 @@ INSTALLED_APPS = [
     'oms',
     'localization',
 
-    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -58,10 +63,20 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# def show_toolbar(request):
+#         return DEBUG
+#         
+# DEBUG_TOOLBAR_CONFIG = {
+#     'SHOW_TOOLBAR_CALLBACK': show_toolbar,
+# }
+
+
+
 # Rest Framework
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
+    "DEFAULT_PAGINATION_CLASS": "core.pagination.CustomPageNumberPagination",
     "PAGE_SIZE": 10,
 }
 # Swagger settings
@@ -107,6 +122,17 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        #"BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://cache:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
@@ -125,12 +151,20 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+# JWT AUTHENTICATION SETTINGS
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=10),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+}
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-DEFAULT_LANG = 'it'
+DEFAULT_LANG = 'en'
 
-LANGUAGE_CODE = 'it-IT'
+LANGUAGE_CODE = 'en-US'
 
 TIME_ZONE = 'Europe/Rome'
 USE_TZ = True

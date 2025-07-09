@@ -2,10 +2,14 @@
 venv
 .env.*
 
-./package-lock.json
+frontend/package-lock.json
 
 frontend/build
 frontend/node_modules
+frontend/*.tsbuildinfo
+
+backend/db.sqlite3
+backend/.coverage
 
 cache/*
 
