@@ -54,6 +54,13 @@ This project is a full-stack application for managing orders and products. It pr
 
 This project uses Docker for both the backend (Django) and frontend (Vue). All commands are run via npm scripts defined in the root `package.json`.
 
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/brunellamarzolini/order-management-system.git
+   cd order-management-system
+
 ### Setup (Required Steps)
 
 To access and use the project, you must run, from the project root, the following commands in order:
