@@ -41,10 +41,6 @@ This project is a full-stack application for managing orders and products. It pr
   - Cache invalidation handled by Django signals for data consistency
 
 
-**Backend API is available at [http://localhost:8000/api/schema/swagger-ui](http://localhost:8000/api/schema/swagger-ui)**  
-**Frontend is available at [http://localhost:3000](http://localhost:3000)**
-
-
 ## Requirements
 
 - [Docker](https://www.docker.com/) installed
@@ -84,6 +80,9 @@ To access and use the project, you must run, from the project root, the followin
    > Runs Django's createsuperuser command inside the backend container. This is required to log in to the application.
 
 After completing these steps, you can access the frontend backoffice and backend api swagger as described above.
+
+**Backend API is available at [http://localhost:8000/api/schema/swagger-ui](http://localhost:8000/api/schema/swagger-ui)**  
+**Frontend is available at [http://localhost:3000](http://localhost:3000)**
 
 ---
 
