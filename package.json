@@ -17,7 +17,8 @@
         "populate_osm": "docker compose exec backend python manage.py populate_languages && docker compose exec backend python manage.py populate_products && docker compose exec backend python manage.py populate_orders",
         "format": "docker compose exec frontend npm run format",
         "lint": "docker compose exec frontend npm run lint",
-        "test": "docker compose exec backend python manage.py test oms"
+        "test": "docker compose exec backend python manage.py test oms",
+        "clearcache": "docker compose exec backend python manage.py clearcache"
     },
     "author": "",
     "license": "ISC"

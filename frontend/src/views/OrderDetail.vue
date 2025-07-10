@@ -20,6 +20,7 @@ import type { Order, Product } from '@/ts/types'
 import BaseDropdown from '@/components/common/BaseDropdown.vue'
 
 const showAddProductModal = ref(false)
+const showRemoveAllProductsModal = ref(false)
 const addProductSelected = ref<Product[]>([])
 const addProductSearch = ref('')
 const {
@@ -125,6 +126,18 @@ watch(order, (val) => {
 
 async function handleUpdate() {
   if (!order.value || !editableOrder.value) return
+  // Check if all products are being removed
+  const originalProducts = order.value.product_details || []
+  const newProducts = editableOrder.value.product_details || []
+  if (originalProducts.length > 0 && newProducts.length === 0) {
+    showRemoveAllProductsModal.value = true
+    return
+  }
+  await doUpdateOrder()
+}
+
+async function doUpdateOrder() {
+  if (!order.value || !editableOrder.value) return
   try {
     await updateOrder(order.value.id, {
       name: editableOrder.value.name,
@@ -139,6 +152,7 @@ async function handleUpdate() {
   } catch {
     showToast(error.value || 'Failed to update order', 'error')
   }
+  showRemoveAllProductsModal.value = false
 }
 
 const showDeleteModal = ref(false)
@@ -353,6 +367,17 @@ const isProductsChanged = computed(() => {
           @click="openDeleteModal"
           >Delete</BaseButton
         >
+        <BaseModal
+          v-model="showRemoveAllProductsModal"
+          title="Remove All Products?"
+          @confirm="doUpdateOrder"
+          @close="showRemoveAllProductsModal = false"
+        >
+          <template #default>
+            Are you sure you want to remove all the products from the order?
+          </template>
+        </BaseModal>
+
         <BaseModal v-model="showDeleteModal" title="Confirm Deletion" @confirm="confirmDelete">
           <template #default>
             Are you sure you want to delete order <strong>{{ order?.id }}</strong

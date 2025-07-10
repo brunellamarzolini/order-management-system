@@ -3,8 +3,8 @@ from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, UpdateMode
 from rest_framework import filters
 from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
+
 from django.db.models import Sum
-from django.core.cache import cache
 from .models import Product, Order
 from .serializers import ProductSerializer, OrderSerializer, OrderListSerializer
 from .filters import OrderFilter
@@ -18,6 +18,11 @@ class ProductViewSet(CacheListResponseMixin, ListModelMixin, GenericViewSet):
 
     filter_backends = [filters.SearchFilter, DjangoFilterBackend]
     search_fields = ["id", "translations__name"]
+
+    # def perform_destroy(self, instance):
+    #     if instance.orders.exists():
+    #         raise ValidationError("Cannot delete product because it is included in one or more orders.")
+    #     super().perform_destroy(instance)
 
 class OrderViewSet(CacheDetailResponseMixin, CacheListResponseMixin, ListModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin, GenericViewSet):
     permission_classes = [IsAuthenticated]
